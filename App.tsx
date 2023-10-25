@@ -1,14 +1,20 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
 
-const App = () => {
+import BrainBox from './src/components/BrainBox';
+import Routes from './src/routes/navigation';
+
+const App: React.FC = () => {
   return (
-    <View>
-      <Text>App</Text>
-    </View>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <BrainBox>
+          <Routes />
+        </BrainBox>
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 };
 
 export default App;
-
-const styles = StyleSheet.create({});
