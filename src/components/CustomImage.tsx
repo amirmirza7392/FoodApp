@@ -13,11 +13,7 @@ interface ComponentProps {
   resizeMode?: ResizeMode;
 }
 
-const FastImageComponent: React.FC<ComponentProps> = ({
-  source,
-  style,
-  resizeMode,
-}) => {
+const CustomImage: React.FC<ComponentProps> = ({source, style, resizeMode}) => {
   const [isImageLoading, setIsImageLoading] = React.useState(false);
   return (
     <View
@@ -43,4 +39,4 @@ const FastImageComponent: React.FC<ComponentProps> = ({
   );
 };
 
-export default FastImageComponent;
+export default CustomImage;

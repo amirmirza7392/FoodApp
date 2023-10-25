@@ -7,6 +7,7 @@ const Login = () => {
   return (
     <View>
       <CamraModal
+        disabled
         handleChange={async res => {
           console.log(res);
         }}

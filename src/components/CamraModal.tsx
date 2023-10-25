@@ -1,17 +1,20 @@
-import React, {useState} from 'react';
 import {Image, View, StyleSheet, TouchableOpacity, Modal} from 'react-native';
 import {openCamera, openPicker} from 'react-native-image-crop-picker';
-import {colors} from '../utils/colors';
+import React, {useState} from 'react';
+
+import CustomImage from './CustomImage';
 import CustomText from './CustomText';
+
+import {images} from '../assets/Images';
+import {colors} from '../utils/colors';
 
 interface UploadPhotoProps {
   renderButton?: (openModal: () => void) => React.ReactNode;
-  imageContainer: any; // Add the correct type for imageContainer
-  options?: any; // Add the correct type for options
+  imageContainer: any;
+  options?: any;
   image?: string;
   placeholder?: string;
-  disabled?: boolean;
-  iconStyle?: any; // Add the correct type for iconStyle
+  iconStyle?: any;
   iconColor?: string;
   handleChange: (image: string) => void;
 }
@@ -30,7 +33,7 @@ const CamraModal: React.FC<UploadPhotoProps> = props => {
       };
       setImageModal(false);
       setTimeout(async () => {
-        const result = await openCamera(options);
+        const result: any = await openCamera(options);
         if (result) {
           setImage(result);
           props.handleChange(result);
@@ -52,7 +55,7 @@ const CamraModal: React.FC<UploadPhotoProps> = props => {
       };
       setImageModal(false);
       setTimeout(async () => {
-        const result = await openPicker(options);
+        const result: any = await openPicker(options);
         if (result) {
           setImage(result);
           props.handleChange(result);
@@ -64,16 +67,26 @@ const CamraModal: React.FC<UploadPhotoProps> = props => {
   };
 
   const ModalIcons: React.FC<{
-    source: string;
+    source: any;
     title: string;
+    width?: number;
+    height?: number;
+    marginTop?: number;
     onPress: () => void;
-  }> = ({source, title, onPress}) => {
+  }> = ({source, title, onPress, width, height, marginTop}) => {
     return (
-      <TouchableOpacity onPress={onPress}>
-        <View style={styles.modalIcon}>
-          <CustomText label={source} />
-        </View>
-        <CustomText label={title} color={colors.black} />
+      <TouchableOpacity style={styles.modalIcon} onPress={onPress}>
+        <CustomImage
+          source={source}
+          style={{width: width || 80, height: height || 80}}
+          resizeMode="contain"
+        />
+        <CustomText
+          label={title}
+          fontWeight="500"
+          marginTop={marginTop}
+          color={colors.black}
+        />
       </TouchableOpacity>
     );
   };
@@ -83,7 +96,7 @@ const CamraModal: React.FC<UploadPhotoProps> = props => {
       {!props.renderButton ? (
         <>
           <View style={props.imageContainer}>
-            <Image
+            <CustomImage
               source={
                 image
                   ? {uri: image}
@@ -96,18 +109,6 @@ const CamraModal: React.FC<UploadPhotoProps> = props => {
               style={styles.image}
             />
           </View>
-          {!props.disabled && (
-            <TouchableOpacity
-              activeOpacity={0.6}
-              style={[styles.iconStyle, props.iconStyle]}
-              onPress={() => setImageModal(true)}>
-              {/* <Entypo
-                name="camera"
-                color={props.iconColor || 'black'}
-                size={17}
-              /> */}
-            </TouchableOpacity>
-          )}
         </>
       ) : (
         props.renderButton(() => setImageModal(true))
@@ -121,18 +122,22 @@ const CamraModal: React.FC<UploadPhotoProps> = props => {
             <CustomText
               label="Choose Picture From"
               fontSize={20}
+              fontWeight="bold"
               color={colors.black}
               alignSelf="center"
             />
             <View style={styles.modalIconContainer}>
               <ModalIcons
-                source={'image'}
+                width={90}
+                height={90}
+                source={images.gallery}
                 title="Phone Storage"
                 onPress={takePhotoFromLibrary}
               />
               <ModalIcons
-                source={'camera'}
+                source={images.camera}
                 title="Open Camera"
+                marginTop={8}
                 onPress={takePhotoFromCamera}
               />
             </View>
@@ -181,5 +186,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
+  },
+  modalIcon: {
+    alignItems: 'center',
+    marginBottom: 10,
   },
 });
