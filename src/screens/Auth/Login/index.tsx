@@ -1,12 +1,12 @@
 import {StyleSheet, View} from 'react-native';
 import React from 'react';
 import CustomText from '../../../components/CustomText';
-import CamraModal from '../../../components/CamraModal';
+import CameraModal from '../../../components/CameraModal';
 
 const Login = () => {
   return (
     <View>
-      <CamraModal
+      <CameraModal
         disabled
         handleChange={async res => {
           console.log(res);

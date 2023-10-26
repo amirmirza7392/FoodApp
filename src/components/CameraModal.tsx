@@ -19,7 +19,7 @@ interface UploadPhotoProps {
   handleChange: (image: string) => void;
 }
 
-const CamraModal: React.FC<UploadPhotoProps> = props => {
+const CameraModal: React.FC<UploadPhotoProps> = props => {
   const [image, setImage] = useState<string>('');
   const [imageModal, setImageModal] = useState<boolean>(false);
 
@@ -148,7 +148,7 @@ const CamraModal: React.FC<UploadPhotoProps> = props => {
   );
 };
 
-export default CamraModal;
+export default CameraModal;
 
 const styles = StyleSheet.create({
   image: {
