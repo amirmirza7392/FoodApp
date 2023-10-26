@@ -1,19 +1,23 @@
+import {StyleSheet} from 'react-native';
 import React, {useState} from 'react';
 
-import CustomText from '../../../components/CustomText';
 import CustomInput from '../../../components/CustomInput';
 import AuthWrapper from '../../../components/AuthWrapper';
 
-import {colors} from '../../../utils/colors';
-
-type LoginProps = {
-  navigation: any;
-};
-
-const Login: React.FC<LoginProps> = ({navigation}) => {
-  const [email, setEmail] = useState<string | null>(null);
-  const [password, setPassword] = useState<string | null>(null);
+const Signup = () => {
+  const [image, setImage] = useState(null);
+  const [userName, setUserName] = useState(null);
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
+  const [confirmPassword, setConfirmPassword] = useState(null);
   const inputs = [
+    {
+      id: 0,
+      placeholder: 'john doe',
+      label: 'Full Name',
+      value: userName,
+      onChange: setUserName,
+    },
     {
       id: 1,
       placeholder: 'example@gmail.com',
@@ -30,12 +34,24 @@ const Login: React.FC<LoginProps> = ({navigation}) => {
       secureTextEntry: true,
       maxLength: 8,
     },
+    {
+      id: 3,
+      placeholder: '********',
+      label: 'Confirm Password',
+      value: confirmPassword,
+      onChange: setConfirmPassword,
+      secureTextEntry: true,
+      maxLength: 8,
+    },
   ];
   return (
     <AuthWrapper
-      title="Login"
-      buttontitle="Login"
-      bottomText="Signup"
+      title="Signup"
+      buttontitle="Signup"
+      bottomText="Login"
+      image={image}
+      hideLogo
+      setImage={setImage}
       onPress={() => {}}
       ShowBottomText>
       {inputs?.map(item => (
@@ -50,19 +66,10 @@ const Login: React.FC<LoginProps> = ({navigation}) => {
           secureTextEntry={item.secureTextEntry}
         />
       ))}
-
-      <CustomText
-        onPress={() => navigation.navigate('ForgotPassword')}
-        label="Forgot Password"
-        marginTop={10}
-        marginBottom={10}
-        color={colors.black}
-        fontWeight="bold"
-        fontSize={13}
-        alignSelf="flex-end"
-      />
     </AuthWrapper>
   );
 };
 
-export default Login;
+export default Signup;
+
+const styles = StyleSheet.create({});

@@ -1,14 +1,15 @@
 import React, {FC} from 'react';
 import {
-  Text,
   TouchableOpacity,
   StyleSheet,
   StyleProp,
   ViewStyle,
   TextStyle,
+  Text,
 } from 'react-native';
-import {colors} from '../utils/colors';
+
 import {metrics} from '../utils/metrics';
+import {colors} from '../utils/colors';
 
 interface CustomTextProps {
   textStyle?: StyleProp<TextStyle>;
@@ -78,10 +79,10 @@ const CustomText: FC<CustomTextProps> = ({
           {
             fontSize: metrics.width(fontSize || 14),
             color: color || colors.black,
-            marginTop: marginTop || 0,
-            marginBottom: marginBottom || 0,
-            marginLeft: marginLeft || 0,
-            marginRight: marginRight || 0,
+            marginTop: metrics.height(marginTop || 0),
+            marginBottom: metrics.height(marginBottom || 0),
+            marginLeft: metrics.width(marginLeft || 0),
+            marginRight: metrics.width(marginRight || 0),
             alignSelf: alignSelf || 'flex-start',
             fontFamily,
             fontStyle,

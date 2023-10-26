@@ -1,4 +1,4 @@
-import {Image, View, StyleSheet, TouchableOpacity, Modal} from 'react-native';
+import {View, StyleSheet, TouchableOpacity, Modal} from 'react-native';
 import {openCamera, openPicker} from 'react-native-image-crop-picker';
 import React, {useState} from 'react';
 

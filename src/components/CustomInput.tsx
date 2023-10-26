@@ -1,27 +1,28 @@
 import React, {FC, useState} from 'react';
 import {
-  View,
-  TextInput,
   TouchableOpacity,
+  TextInput,
   StyleSheet,
   StyleProp,
   ViewStyle,
   TextStyle,
+  View,
 } from 'react-native';
+
 import CustomText from './CustomText';
-import {colors} from '../utils/colors';
+import Icons from './CustomIcon';
+
 import {metrics} from '../utils/metrics';
+import {colors} from '../utils/colors';
 
 interface CustomInputProps {
   placeholder?: string;
   inputStyle?: StyleProp<TextStyle>;
   placeholderTextColor?: string;
-  onChangeText?: (text: string) => void;
-  value?: string;
+  onChangeText?: any;
+  value?: any;
   keyboardType?: 'default' | 'numeric' | 'email-address' | 'phone-pad';
   secureTextEntry?: boolean;
-  marginRight?: number;
-  marginLeft?: number;
   withLabel?: string;
   borderColor?: string;
   labelStyle?: StyleProp<TextStyle>;
@@ -29,7 +30,6 @@ interface CustomInputProps {
   borderRadius?: number;
   height?: number;
   paddingHorizontal?: number;
-  searchIcon?: boolean;
   borderWidth?: number;
   alignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'stretch';
   multiline?: boolean;
@@ -45,23 +45,15 @@ interface CustomInputProps {
   errorMessage?: string;
   editable?: boolean;
   inputTextColor?: string;
-  searchSize?: number;
-  searchColor?: string;
-  calendarIcon?: boolean;
-  onCalendar?: () => void;
-  showTip?: boolean;
-  setTip?: () => void;
   reference?: React.Ref<TextInput>;
   width?: number | string;
   autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters';
   label?: string;
-  labelColor?: string;
   textStyle?: StyleProp<TextStyle>;
   mainStyle?: StyleProp<ViewStyle>;
   onFocus?: () => void;
   onBlur?: () => void;
   autoFocus?: boolean;
-  customData?: any;
   errorWidth?: number | string;
   errorAlignSelf?: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'stretch';
 }
@@ -117,10 +109,12 @@ const CustomInput: FC<CustomInputProps> = ({
       {withLabel && (
         <CustomText
           textStyle={labelStyle}
-          fontSize={metrics.width(12)}
+          fontSize={16}
           color={colors.black}
           label={withLabel}
-          marginTop={metrics.height(12)}
+          marginTop={12}
+          marginBottom={5}
+          fontWeight="500"
         />
       )}
 
@@ -130,8 +124,8 @@ const CustomInput: FC<CustomInputProps> = ({
           alignItems: alignItems || 'center',
           paddingVertical: paddingVertical || metrics.height(10),
           borderWidth: borderWidth || 1,
-          borderColor: borderColor || colors.black,
-          backgroundColor: backgroundColor || colors.black,
+          borderColor: borderColor || colors.blue,
+          backgroundColor: backgroundColor || colors.white,
           borderRadius: borderRadius || 5,
           height: metrics.height(height || 55),
           paddingHorizontal: paddingHorizontal || 15,
@@ -174,7 +168,14 @@ const CustomInput: FC<CustomInputProps> = ({
               style={{
                 marginLeft: metrics.width(15),
               }}
-              onPress={() => setHidePass(!hidePass)}></TouchableOpacity>
+              onPress={() => setHidePass(!hidePass)}>
+              <Icons
+                family="Entypo"
+                size={metrics.width(20)}
+                name={hidePass ? 'eye-with-line' : 'eye'}
+                color={colors.black}
+              />
+            </TouchableOpacity>
           )}
         </View>
       </View>
@@ -182,11 +183,10 @@ const CustomInput: FC<CustomInputProps> = ({
         <CustomText
           label={errorMessage}
           color={colors.red}
-          marginTop={metrics.height(-13)}
-          marginBottom={metrics.height(10)}
           textStyle={textStyle}
           width={errorWidth || '60%'}
-          alignSelf={errorAlignSelf || 'auto'}
+          marginTop={5}
+          alignSelf={errorAlignSelf || 'flex-start'}
         />
       ) : null}
     </TouchableOpacity>
@@ -200,8 +200,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   iconContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: metrics.width(15),
+    position: 'absolute',
+    right: metrics.width(20),
   },
 });

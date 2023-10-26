@@ -1,7 +1,8 @@
-import React, {FC} from 'react';
 import {Text, TouchableOpacity, View, ActivityIndicator} from 'react-native';
-import {colors} from '../utils/colors';
+import React, {FC} from 'react';
+
 import {metrics} from '../utils/metrics';
+import {colors} from '../utils/colors';
 
 interface CustomButtonProps {
   onPress?: () => void;
@@ -49,7 +50,6 @@ const CustomButton: FC<CustomButtonProps> = ({
   color,
   fontWeight,
   ShowIcon,
-  fontFamily,
   Loading,
   disabled,
   ActivityIndicatorColor,
@@ -90,7 +90,7 @@ const CustomButton: FC<CustomButtonProps> = ({
             style={{
               fontSize: metrics.width(fontSize || 14),
               color: color || colors.white,
-              fontWeight: fontWeight,
+              fontWeight: fontWeight || '700',
               marginLeft: ShowIcon ? metrics.width(10) : 0,
               letterSpacing: 0.4,
             }}>
