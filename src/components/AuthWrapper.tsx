@@ -22,9 +22,9 @@ import {colors} from '../utils/colors';
 
 interface AuthWrapperProps {
   children: ReactNode;
-  title: string;
-  buttontitle: string;
-  onPress: () => void;
+  title?: string;
+  buttontitle?: string;
+  onPress?: () => void;
   ShowBottomText?: boolean;
   loading?: boolean;
   disabled?: boolean;
@@ -32,6 +32,9 @@ interface AuthWrapperProps {
   bottomText?: string;
   image?: string;
   setImage?: any;
+  hideButton?: boolean;
+  headingMarginTop?: number;
+  headingMarginBottom?: number;
 }
 
 const AuthWrapper: React.FC<AuthWrapperProps> = ({
@@ -45,13 +48,18 @@ const AuthWrapper: React.FC<AuthWrapperProps> = ({
   image,
   setImage,
   hideLogo,
+  hideButton,
+  headingMarginTop,
+  headingMarginBottom,
 }) => {
   const navigation = useNavigation();
 
   return (
     <SafeAreaView style={styles.mainContainer}>
       <StatusBar backgroundColor={colors.white} barStyle="dark-content" />
-      <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
+      <KeyboardAwareScrollView
+        style={{backgroundColor: colors.white}}
+        showsVerticalScrollIndicator={false}>
         {hideLogo ? (
           <CameraModal
             handleChange={async res => {
@@ -96,19 +104,21 @@ const AuthWrapper: React.FC<AuthWrapperProps> = ({
           label={title}
           fontSize={35}
           fontWeight="bold"
-          marginBottom={hideLogo ? 20 : 30}
-          marginTop={20}
+          marginBottom={hideLogo ? 20 : headingMarginBottom || 30}
+          marginTop={headingMarginTop || 20}
           color={colors.blue}
         />
         {children}
-        <CustomButton
-          disabled={disabled}
-          title={buttontitle}
-          fontSize={20}
-          borderRadius={100}
-          onPress={onPress}
-          marginTop={30}
-        />
+        {hideButton ? null : (
+          <CustomButton
+            disabled={disabled}
+            title={buttontitle}
+            fontSize={20}
+            borderRadius={100}
+            onPress={onPress}
+            marginTop={30}
+          />
+        )}
       </KeyboardAwareScrollView>
       {!!ShowBottomText && (
         <View style={styles.bottomText}>

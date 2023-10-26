@@ -7,6 +7,8 @@ import Login from '../screens/Auth/Login';
 import Signup from '../screens/Auth/Signup';
 
 import Home from '../screens/Main/Home';
+import OTP from '../screens/Auth/OTP';
+import ResetPassword from '../screens/Auth/ResetPassword';
 
 type RootStackParamList = {
   Login: undefined;
@@ -22,6 +24,8 @@ const Routes: React.FC = () => {
       initialRouteName="Signup">
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Signup" component={Signup} />
+      <Stack.Screen name="OTP" component={OTP} />
+      <Stack.Screen name="ResetPassword" component={ResetPassword} />
       <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
       <Stack.Screen name="Home" component={Home} />
     </Stack.Navigator>

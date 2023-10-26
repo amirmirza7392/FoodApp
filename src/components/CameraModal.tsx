@@ -20,7 +20,7 @@ interface UploadPhotoProps {
 }
 
 const CameraModal: React.FC<UploadPhotoProps> = props => {
-  const [image, setImage] = useState<string>('');
+  const [image, setImage] = useState<any>('');
   const [imageModal, setImageModal] = useState<boolean>(false);
 
   const takePhotoFromCamera = () => {

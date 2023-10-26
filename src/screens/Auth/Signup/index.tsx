@@ -1,15 +1,19 @@
-import {StyleSheet} from 'react-native';
 import React, {useState} from 'react';
 
 import CustomInput from '../../../components/CustomInput';
 import AuthWrapper from '../../../components/AuthWrapper';
 
-const Signup = () => {
-  const [image, setImage] = useState(null);
-  const [userName, setUserName] = useState(null);
-  const [email, setEmail] = useState(null);
-  const [password, setPassword] = useState(null);
-  const [confirmPassword, setConfirmPassword] = useState(null);
+interface SignupProps {
+  navigation: any;
+}
+
+const Signup: React.FC<SignupProps> = ({navigation}) => {
+  const [image, setImage] = useState<any>(null);
+  const [userName, setUserName] = useState<string | null>(null);
+  const [email, setEmail] = useState<string | null>(null);
+  const [password, setPassword] = useState<string | null>(null);
+  const [confirmPassword, setConfirmPassword] = useState<string | null>(null);
+
   const inputs = [
     {
       id: 0,
@@ -44,6 +48,7 @@ const Signup = () => {
       maxLength: 8,
     },
   ];
+
   return (
     <AuthWrapper
       title="Signup"
@@ -52,7 +57,16 @@ const Signup = () => {
       image={image}
       hideLogo
       setImage={setImage}
-      onPress={() => {}}
+      onPress={() =>
+        navigation.reset({
+          index: 0,
+          routes: [
+            {
+              name: 'Home',
+            },
+          ],
+        })
+      }
       ShowBottomText>
       {inputs?.map(item => (
         <CustomInput
@@ -71,5 +85,3 @@ const Signup = () => {
 };
 
 export default Signup;
-
-const styles = StyleSheet.create({});

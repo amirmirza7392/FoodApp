@@ -124,7 +124,7 @@ const CustomInput: FC<CustomInputProps> = ({
           alignItems: alignItems || 'center',
           paddingVertical: paddingVertical || metrics.height(10),
           borderWidth: borderWidth || 1,
-          borderColor: borderColor || colors.blue,
+          borderColor: borderColor || colors.placeHolder,
           backgroundColor: backgroundColor || colors.white,
           borderRadius: borderRadius || 5,
           height: metrics.height(height || 55),

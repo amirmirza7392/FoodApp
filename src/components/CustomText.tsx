@@ -37,6 +37,7 @@ interface CustomTextProps {
   lineHeight?: number;
   container?: StyleProp<ViewStyle>;
   numberOfLines?: number;
+  disabled?: any;
 }
 
 const CustomText: FC<CustomTextProps> = ({
@@ -65,12 +66,13 @@ const CustomText: FC<CustomTextProps> = ({
   lineHeight,
   container,
   numberOfLines,
+  disabled,
 }) => {
   return (
     <TouchableOpacity
       activeOpacity={0.6}
       onPress={onPress}
-      disabled={!onPress}
+      disabled={disabled || !onPress}
       style={[styles.mainContainer, container]}>
       <Text
         numberOfLines={numberOfLines}

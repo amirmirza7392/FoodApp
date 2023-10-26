@@ -36,7 +36,16 @@ const Login: React.FC<LoginProps> = ({navigation}) => {
       title="Login"
       buttontitle="Login"
       bottomText="Signup"
-      onPress={() => {}}
+      onPress={() =>
+        navigation.reset({
+          index: 0,
+          routes: [
+            {
+              name: 'Home',
+            },
+          ],
+        })
+      }
       ShowBottomText>
       {inputs?.map(item => (
         <CustomInput

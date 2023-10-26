@@ -1,20 +1,20 @@
-import {StyleSheet} from 'react-native';
 import React, {useState} from 'react';
 
 import CustomInput from '../../../components/CustomInput';
 import AuthWrapper from '../../../components/AuthWrapper';
-import CustomText from '../../../components/CustomText';
 
-import {colors} from '../../../utils/colors';
+interface ForgotPasswordProps {
+  navigation: any;
+}
 
-const ForgotPassword = ({navigation}) => {
-  const [email, setEmail] = useState(null);
+const ForgotPassword: React.FC<ForgotPasswordProps> = ({navigation}) => {
+  const [email, setEmail] = useState<string | null>(null);
 
   return (
     <AuthWrapper
       title="Forgot Your Password"
       buttontitle="Continue"
-      onPress={() => {}}>
+      onPress={() => navigation.navigate('OTP')}>
       <CustomInput
         placeholder="example@gmail.com"
         withLabel={'Email'}
@@ -27,5 +27,3 @@ const ForgotPassword = ({navigation}) => {
 };
 
 export default ForgotPassword;
-
-const styles = StyleSheet.create({});
