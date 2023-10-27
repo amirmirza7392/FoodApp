@@ -6,11 +6,21 @@ import CustomButton from '../../../../components/CustomButton';
 import CustomImage from '../../../../components/CustomImage';
 import CustomText from '../../../../components/CustomText';
 
-import {timeline} from '../../../../utils/constants';
 import {metrics} from '../../../../utils/metrics';
 import {colors} from '../../../../utils/colors';
 
-const Updates = () => {
+interface Item {
+  thumb: string;
+  headline: string;
+  description: string;
+  calories: number;
+}
+
+interface UpdatesProps {
+  array: Item[];
+}
+
+const Updates: React.FC<UpdatesProps> = ({array}) => {
   return (
     <View>
       <CustomText
@@ -21,7 +31,7 @@ const Updates = () => {
         marginBottom={20}
         color={colors.blue}
       />
-      {timeline.map((item, i) => (
+      {array.map((item, i) => (
         <View style={styles.itemContainer} key={i}>
           <CustomImage
             source={{uri: item.thumb}}

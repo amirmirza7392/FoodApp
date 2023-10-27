@@ -7,8 +7,8 @@ import {metrics} from '../../../../utils/metrics';
 import {colors} from '../../../../utils/colors';
 
 interface SearchProps {
-  value: string | null;
-  setValue: (value: string | null) => void;
+  value: any;
+  setValue: any;
 }
 
 const Search: React.FC<SearchProps> = ({value, setValue}) => {
@@ -22,7 +22,7 @@ const Search: React.FC<SearchProps> = ({value, setValue}) => {
         placeholder="What you want to search?"
         placeholderTextColor={colors.placeHolder}
         value={value || ''}
-        onChangeText={setValue}
+        onChangeText={text => setValue(text)}
       />
       {value?.length > 0 ? (
         <TouchableOpacity

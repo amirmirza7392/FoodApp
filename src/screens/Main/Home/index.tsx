@@ -9,11 +9,26 @@ import Updates from './molecules/Updates';
 import Search from './molecules/Search';
 import Design from './molecules/Design';
 
+import {timeline} from '../../../utils/constants';
 import {metrics} from '../../../utils/metrics';
 import {colors} from '../../../utils/colors';
 
 const Home: React.FC = () => {
   const [search, setSearch] = useState<string | null>(null);
+  const [filter, setFilter] = useState<any>(timeline);
+
+  const onSearch = (text: string) => {
+    setSearch(text);
+    if (text.length === 0) {
+      setFilter(timeline);
+    } else {
+      const lowerCaseText = text.toLowerCase();
+      const res = timeline?.filter(item =>
+        item?.headline?.toLowerCase().includes(lowerCaseText),
+      );
+      setFilter(res);
+    }
+  };
 
   return (
     <SafeAreaView style={styles.mainContainer}>
@@ -21,10 +36,10 @@ const Home: React.FC = () => {
       <ScrollView
         contentContainerStyle={styles.scroll}
         showsVerticalScrollIndicator={false}>
-        <Search value={search} setValue={setSearch} />
+        <Search value={search} setValue={onSearch} />
         <Design />
         <Categories />
-        <Updates />
+        <Updates array={filter} />
       </ScrollView>
     </SafeAreaView>
   );
