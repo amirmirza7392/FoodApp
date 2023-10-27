@@ -5,4 +5,7 @@ export const colors = {
   placeHolder: '#989797',
   red: '#FF0000',
   green: '#64AA62',
+  error: '#E83B2E',
+  success: '#2fa345',
+  info: '#3659E3',
 };

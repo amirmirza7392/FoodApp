@@ -1,5 +1,5 @@
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {ScrollView, StyleSheet} from 'react-native';
+import {Button, ScrollView, StyleSheet} from 'react-native';
 import React, {useState} from 'react';
 
 import Header from '../../../components/Header';
@@ -12,6 +12,7 @@ import Design from './molecules/Design';
 import {timeline} from '../../../utils/constants';
 import {metrics} from '../../../utils/metrics';
 import {colors} from '../../../utils/colors';
+import {showToast} from '../../../components/CustomToast';
 
 const Home: React.FC = () => {
   const [search, setSearch] = useState<string | null>(null);
