@@ -14,6 +14,12 @@ const Signup: React.FC<SignupProps> = ({navigation}) => {
   const [password, setPassword] = useState<string | null>(null);
   const [confirmPassword, setConfirmPassword] = useState<string | null>(null);
 
+  const onSignup = () => {
+    if (!email) {
+      alert('error', '*Email is required');
+    }
+  };
+
   const inputs = [
     {
       id: 0,
@@ -57,16 +63,17 @@ const Signup: React.FC<SignupProps> = ({navigation}) => {
       image={image}
       hideLogo
       setImage={setImage}
-      onPress={() =>
-        navigation.reset({
-          index: 0,
-          routes: [
-            {
-              name: 'Home',
-            },
-          ],
-        })
-      }
+      onPress={onSignup}
+      // onPress={() =>
+      //   navigation.reset({
+      //     index: 0,
+      //     routes: [
+      //       {
+      //         name: 'Home',
+      //       },
+      //     ],
+      //   })
+      // }
       ShowBottomText>
       {inputs?.map(item => (
         <CustomInput
