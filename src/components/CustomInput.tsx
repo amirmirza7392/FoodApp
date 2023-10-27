@@ -106,7 +106,7 @@ const CustomInput: FC<CustomInputProps> = ({
       onPress={onPress}
       disabled={!onPress}
       style={[styles.main, mainStyle]}>
-      {withLabel && (
+      {withLabel ? (
         <CustomText
           textStyle={labelStyle}
           fontSize={16}
@@ -116,7 +116,7 @@ const CustomInput: FC<CustomInputProps> = ({
           marginBottom={5}
           fontWeight="500"
         />
-      )}
+      ) : null}
 
       <View
         style={{

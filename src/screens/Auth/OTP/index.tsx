@@ -1,7 +1,9 @@
 import React, {useEffect, useState} from 'react';
+
 import AuthWrapper from '../../../components/AuthWrapper';
-import OTPInput from '../../../components/OTPInput';
 import CustomText from '../../../components/CustomText';
+import OTPInput from '../../../components/OTPInput';
+
 import {colors} from '../../../utils/colors';
 
 interface OTPProps {
@@ -29,6 +31,7 @@ const OTP: React.FC<OTPProps> = ({navigation, route}) => {
 
   return (
     <AuthWrapper
+      isBack
       headingMarginTop={40}
       headingMarginBottom={5}
       title="Verification Code"

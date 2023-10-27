@@ -31,6 +31,7 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({navigation}) => {
   ];
   return (
     <AuthWrapper
+      isBack
       title="Reset Password"
       buttontitle="Continue"
       headingMarginTop={40}

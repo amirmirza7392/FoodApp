@@ -12,6 +12,7 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = ({navigation}) => {
 
   return (
     <AuthWrapper
+      isBack
       title="Forgot Your Password"
       buttontitle="Continue"
       onPress={() => navigation.navigate('OTP')}>

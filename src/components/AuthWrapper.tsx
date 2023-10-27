@@ -35,6 +35,7 @@ interface AuthWrapperProps {
   hideButton?: boolean;
   headingMarginTop?: number;
   headingMarginBottom?: number;
+  isBack: boolean;
 }
 
 const AuthWrapper: React.FC<AuthWrapperProps> = ({
@@ -51,20 +52,33 @@ const AuthWrapper: React.FC<AuthWrapperProps> = ({
   hideButton,
   headingMarginTop,
   headingMarginBottom,
+  isBack,
 }) => {
   const navigation = useNavigation();
 
   return (
     <SafeAreaView style={styles.mainContainer}>
       <StatusBar backgroundColor={colors.white} barStyle="dark-content" />
+      {isBack ? (
+        <TouchableOpacity
+          activeOpacity={0.6}
+          onPress={() => navigation.goBack()}
+          style={styles.backIcon}>
+          <Icons
+            family="AntDesign"
+            name="back"
+            size={metrics.width(25)}
+            color={colors.white}
+          />
+        </TouchableOpacity>
+      ) : null}
+
       <KeyboardAwareScrollView
         style={{backgroundColor: colors.white}}
         showsVerticalScrollIndicator={false}>
         {hideLogo ? (
           <CameraModal
             handleChange={async res => {
-              console.log(res);
-
               setImage(res?.path);
             }}
             renderButton={handleChange => (
@@ -120,7 +134,7 @@ const AuthWrapper: React.FC<AuthWrapperProps> = ({
           />
         )}
       </KeyboardAwareScrollView>
-      {!!ShowBottomText && (
+      {!!ShowBottomText ? (
         <View style={styles.bottomText}>
           <CustomText
             label={`${
@@ -135,7 +149,7 @@ const AuthWrapper: React.FC<AuthWrapperProps> = ({
             color={colors.blue}
           />
         </View>
-      )}
+      ) : null}
     </SafeAreaView>
   );
 };
@@ -167,7 +181,6 @@ const styles = StyleSheet.create({
   profile: {
     width: '100%',
     height: '100%',
-    // borderRadius: 100,
   },
   orContainer: {
     marginTop: metrics.height(40),
@@ -183,5 +196,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'center',
     marginBottom: metrics.height(20),
+  },
+  backIcon: {
+    width: metrics.width(40),
+    height: metrics.width(40),
+    borderRadius: 5,
+    backgroundColor: colors.blue,
+    borderTopLeftRadius: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    zIndex: 1,
+    top: metrics.height(20),
+    left: metrics.width(20),
   },
 });

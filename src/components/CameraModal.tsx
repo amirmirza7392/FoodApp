@@ -92,7 +92,7 @@ const CameraModal: React.FC<UploadPhotoProps> = props => {
   };
 
   return (
-    <View style={!props.renderButton && styles.container}>
+    <View style={!props.renderButton ? styles.container : {}}>
       {!props.renderButton ? (
         <>
           <View style={props.imageContainer}>

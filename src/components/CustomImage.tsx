@@ -18,7 +18,7 @@ const CustomImage: React.FC<ComponentProps> = ({source, style, resizeMode}) => {
   return (
     <View
       style={
-        isImageLoading && {justifyContent: 'center', alignItems: 'center'}
+        isImageLoading ? {justifyContent: 'center', alignItems: 'center'} : {}
       }>
       <FastImage
         onLoadStart={() => setIsImageLoading(true)}
@@ -28,13 +28,13 @@ const CustomImage: React.FC<ComponentProps> = ({source, style, resizeMode}) => {
         style={style}
       />
 
-      {isImageLoading && (
+      {isImageLoading ? (
         <ActivityIndicator
           style={{position: 'absolute'}}
           color="#999999"
           size="large"
         />
-      )}
+      ) : null}
     </View>
   );
 };
