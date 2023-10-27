@@ -41,7 +41,7 @@ const OTP: React.FC<OTPProps> = ({navigation, route}) => {
         fontSize={14}
         marginLeft={10}
         label={`OTP sent to your ${
-          !email || email === undefined ? 'example@gmail.com' : email
+          !email || email === undefined ? 'example@gmail.com' : `"${email}"`
         }`}
       />
       <OTPInput

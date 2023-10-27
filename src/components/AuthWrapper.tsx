@@ -1,6 +1,7 @@
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import FastImage from 'react-native-fast-image';
 import {
+  Image,
   SafeAreaView,
   StatusBar,
   StyleSheet,
@@ -87,11 +88,7 @@ const AuthWrapper: React.FC<AuthWrapperProps> = ({
                 activeOpacity={0.6}
                 onPress={handleChange}>
                 {image ? (
-                  <CustomImage
-                    style={styles.profile}
-                    resizeMode={FastImage.resizeMode.cover}
-                    source={{uri: image}}
-                  />
+                  <Image style={styles.profile} source={{uri: image}} />
                 ) : (
                   <Icons
                     name="camera"
@@ -181,6 +178,8 @@ const styles = StyleSheet.create({
   profile: {
     width: '100%',
     height: '100%',
+    borderRadius: 100,
+    resizeMode: 'cover',
   },
   orContainer: {
     marginTop: metrics.height(40),

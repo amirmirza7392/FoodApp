@@ -1,9 +1,11 @@
+import Snackbar from 'react-native-snackbar';
 import React, {useState} from 'react';
 
 import CustomText from '../../../components/CustomText';
 import CustomInput from '../../../components/CustomInput';
 import AuthWrapper from '../../../components/AuthWrapper';
 
+import {isValidEmail} from '../../../utils/constants';
 import {colors} from '../../../utils/colors';
 
 type LoginProps = {
@@ -13,6 +15,41 @@ type LoginProps = {
 const Login: React.FC<LoginProps> = ({navigation}) => {
   const [email, setEmail] = useState<string | null>(null);
   const [password, setPassword] = useState<string | null>(null);
+  const onLogin = () => {
+    if (!email) {
+      return Snackbar.show({
+        text: 'Email is required',
+        duration: Snackbar.LENGTH_LONG,
+        backgroundColor: colors.error,
+        textColor: colors.white,
+      });
+    } else if (!isValidEmail(email)) {
+      return Snackbar.show({
+        text: 'Email not valid',
+        duration: Snackbar.LENGTH_LONG,
+        backgroundColor: colors.error,
+        textColor: colors.white,
+      });
+    } else if (!password) {
+      return Snackbar.show({
+        text: 'Password is required',
+        duration: Snackbar.LENGTH_LONG,
+        backgroundColor: colors.error,
+        textColor: colors.white,
+      });
+    } else {
+      navigation.reset({
+        index: 0,
+        routes: [
+          {
+            name: 'Home',
+          },
+        ],
+      });
+      setEmail(null);
+      setPassword(null);
+    }
+  };
   const inputs = [
     {
       id: 1,
@@ -36,16 +73,7 @@ const Login: React.FC<LoginProps> = ({navigation}) => {
       title="Login"
       buttontitle="Login"
       bottomText="Signup"
-      onPress={() =>
-        navigation.reset({
-          index: 0,
-          routes: [
-            {
-              name: 'Home',
-            },
-          ],
-        })
-      }
+      onPress={onLogin}
       ShowBottomText>
       {inputs?.map(item => (
         <CustomInput

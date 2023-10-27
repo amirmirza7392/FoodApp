@@ -1,7 +1,11 @@
+import Snackbar from 'react-native-snackbar';
 import React, {useState} from 'react';
 
 import CustomInput from '../../../components/CustomInput';
 import AuthWrapper from '../../../components/AuthWrapper';
+
+import {isValidEmail} from '../../../utils/constants';
+import {colors} from '../../../utils/colors';
 
 interface SignupProps {
   navigation: any;
@@ -15,8 +19,69 @@ const Signup: React.FC<SignupProps> = ({navigation}) => {
   const [confirmPassword, setConfirmPassword] = useState<string | null>(null);
 
   const onSignup = () => {
-    if (!email) {
-      alert('error', '*Email is required');
+    if (!image) {
+      return Snackbar.show({
+        text: 'Profile image is required',
+        duration: Snackbar.LENGTH_LONG,
+        backgroundColor: colors.error,
+        textColor: colors.white,
+      });
+    } else if (!userName) {
+      return Snackbar.show({
+        text: 'Full Name is required',
+        duration: Snackbar.LENGTH_LONG,
+        backgroundColor: colors.error,
+        textColor: colors.white,
+      });
+    } else if (!email) {
+      return Snackbar.show({
+        text: 'Email is required',
+        duration: Snackbar.LENGTH_LONG,
+        backgroundColor: colors.error,
+        textColor: colors.white,
+      });
+    } else if (!isValidEmail(email)) {
+      return Snackbar.show({
+        text: 'Email not valid',
+        duration: Snackbar.LENGTH_LONG,
+        backgroundColor: colors.error,
+        textColor: colors.white,
+      });
+    } else if (!password) {
+      return Snackbar.show({
+        text: 'Password is required',
+        duration: Snackbar.LENGTH_LONG,
+        backgroundColor: colors.error,
+        textColor: colors.white,
+      });
+    } else if (!confirmPassword) {
+      return Snackbar.show({
+        text: 'Confirm Password is required',
+        duration: Snackbar.LENGTH_LONG,
+        backgroundColor: colors.error,
+        textColor: colors.white,
+      });
+    } else if (password !== confirmPassword) {
+      return Snackbar.show({
+        text: 'Password and Confirm Password not match',
+        duration: Snackbar.LENGTH_LONG,
+        backgroundColor: colors.error,
+        textColor: colors.white,
+      });
+    } else {
+      navigation.reset({
+        index: 0,
+        routes: [
+          {
+            name: 'Home',
+          },
+        ],
+      });
+      setImage(null);
+      setUserName(null);
+      setEmail(null);
+      setPassword(null);
+      setConfirmPassword(null);
     }
   };
 
@@ -64,16 +129,6 @@ const Signup: React.FC<SignupProps> = ({navigation}) => {
       hideLogo
       setImage={setImage}
       onPress={onSignup}
-      // onPress={() =>
-      //   navigation.reset({
-      //     index: 0,
-      //     routes: [
-      //       {
-      //         name: 'Home',
-      //       },
-      //     ],
-      //   })
-      // }
       ShowBottomText>
       {inputs?.map(item => (
         <CustomInput
