@@ -80,6 +80,12 @@ const Signup: React.FC<SignupProps> = ({navigation}) => {
           },
         ],
       });
+      Snackbar.show({
+        text: 'Signup Success',
+        duration: Snackbar.LENGTH_LONG,
+        backgroundColor: colors.success,
+        textColor: colors.white,
+      });
       setImage(null);
       setUserName(null);
       setEmail(null);

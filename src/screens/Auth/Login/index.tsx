@@ -51,6 +51,12 @@ const Login: React.FC<LoginProps> = ({navigation}) => {
       });
       setEmail(null);
       setPassword(null);
+      Snackbar.show({
+        text: 'Login Success',
+        duration: Snackbar.LENGTH_LONG,
+        backgroundColor: colors.success,
+        textColor: colors.white,
+      });
     }
   };
   const inputs = [
