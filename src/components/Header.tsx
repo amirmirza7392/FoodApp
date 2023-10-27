@@ -1,10 +1,10 @@
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
 import CustomImage from './CustomImage';
 import CustomText from './CustomText';
-import Icons from './CustomIcon';
 
 import {metrics} from '../utils/metrics';
 import {images} from '../assets/Images';
@@ -14,16 +14,25 @@ interface HeaderProps {
   title: string;
 }
 
-const Header: React.FC<HeaderProps> = ({title}) => {
+const Header: React.FC<HeaderProps> = ({title}: HeaderProps) => {
   const navigation = useNavigation();
+  const [profile, setProfile] = useState<any>(null);
+
+  const getProfile = async () => {
+    const res = await AsyncStorage.getItem('userData');
+    setProfile(JSON.parse(res));
+  };
+
+  useEffect(() => {
+    getProfile();
+  }, []);
+
   return (
     <View style={styles.mainContainer}>
       <View style={styles.first}>
-        <Icons
-          family="Ionicons"
-          name="home"
-          color={colors.blue}
-          size={metrics.width(60)}
+        <CustomImage
+          source={images.logo}
+          style={[styles.profile, {borderRadius: 100}]}
         />
       </View>
       <View style={styles.second}>
@@ -38,7 +47,9 @@ const Header: React.FC<HeaderProps> = ({title}) => {
         <TouchableOpacity
           activeOpacity={0.6}
           onPress={() => navigation.navigate('Profile')}>
-          <CustomImage source={images.logo} style={styles.profile} />
+          {profile?.image ? (
+            <Image source={{uri: profile?.image}} style={styles.profile} />
+          ) : null}
         </TouchableOpacity>
       </View>
     </View>
@@ -70,5 +81,6 @@ const styles = StyleSheet.create({
     width: metrics.width(75),
     height: metrics.width(75),
     borderRadius: 8,
+    resizeMode: 'cover',
   },
 });

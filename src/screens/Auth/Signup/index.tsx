@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Snackbar from 'react-native-snackbar';
 import React, {useState} from 'react';
 
@@ -18,7 +19,7 @@ const Signup: React.FC<SignupProps> = ({navigation}) => {
   const [password, setPassword] = useState<string | null>(null);
   const [confirmPassword, setConfirmPassword] = useState<string | null>(null);
 
-  const onSignup = () => {
+  const onSignup = async () => {
     if (!image) {
       return Snackbar.show({
         text: 'Profile image is required',
@@ -69,6 +70,8 @@ const Signup: React.FC<SignupProps> = ({navigation}) => {
         textColor: colors.white,
       });
     } else {
+      const payload = {name: userName, email, image};
+      await AsyncStorage.setItem('userData', JSON.stringify(payload));
       navigation.reset({
         index: 0,
         routes: [

@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Snackbar from 'react-native-snackbar';
 import React, {useState} from 'react';
 
@@ -5,7 +6,7 @@ import CustomText from '../../../components/CustomText';
 import CustomInput from '../../../components/CustomInput';
 import AuthWrapper from '../../../components/AuthWrapper';
 
-import {isValidEmail} from '../../../utils/constants';
+import {isValidEmail, userImage} from '../../../utils/constants';
 import {colors} from '../../../utils/colors';
 
 type LoginProps = {
@@ -15,7 +16,7 @@ type LoginProps = {
 const Login: React.FC<LoginProps> = ({navigation}) => {
   const [email, setEmail] = useState<string | null>(null);
   const [password, setPassword] = useState<string | null>(null);
-  const onLogin = () => {
+  const onLogin = async () => {
     if (!email) {
       return Snackbar.show({
         text: 'Email is required',
@@ -38,6 +39,8 @@ const Login: React.FC<LoginProps> = ({navigation}) => {
         textColor: colors.white,
       });
     } else {
+      const payload = {name: 'Amir Mirza', email, image: userImage};
+      await AsyncStorage.setItem('userData', JSON.stringify(payload));
       navigation.reset({
         index: 0,
         routes: [
